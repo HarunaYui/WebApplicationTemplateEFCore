@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplicationTemplate</name>
+    </assembly>
+    <members>
+        <member name="T:WebApplicationTemplate.ActionFilter.NotRateTransactionAttribute">
+            <summary>
+            不需要访问限制特性
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.ActionFilter.NotTransactionAttribute">
+            <summary>
+            不需要回退事务特性
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.ActionFilter.RateLimitFilter">
+            <summary>
+            访问限制事务
+            </summary>
+        </member>
+        <member name="F:WebApplicationTemplate.ActionFilter.RateLimitFilter._memoryCache">
+            <summary>
+            内存缓存
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.ActionFilter.RateLimitFilter.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            构造注入内存缓存
+            </summary>
+            <param name="memoryCache"></param>
+        </member>
+        <member name="M:WebApplicationTemplate.ActionFilter.RateLimitFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            事务
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.ActionFilter.TransactionScopeFilter">
+            <summary>
+            事件回退事务
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.ActionFilter.TransactionScopeFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            事务
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.AppDB.AppDB">
+            <summary>
+            数据库注入
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.AppDB.#ctor(System.String)">
+            <summary>
+            数据库注入
+            </summary>
+            <param name="connectionString"></param>
+        </member>
+        <member name="P:WebApplicationTemplate.AppDB.AppDB.Connection">
+            <summary>
+            数据库连接
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.AppDB.Dispose">
+            <summary>
+            资源释放
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.AppDB.Extensions.SizeAttribute">
+            <summary>
+            数据库大小特性
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.AppDB.Extensions.SizeAttribute.Size">
+            <summary>
+            大小
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Extensions.SizeAttribute.#ctor(System.Int32)">
+            <summary>
+            构造
+            </summary>
+            <param name="size"></param>
+        </member>
+        <member name="T:WebApplicationTemplate.AppDB.Methods">
+            <summary>
+            数据库类型转换
+            </summary>
+        </member>
+        <member name="F:WebApplicationTemplate.AppDB.Methods.defaultId">
+            <summary>
+            默认表的主键名
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Methods.TypeToDbType(System.Type)">
+            <summary>
+            根据类型获取对应的 DbType
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Methods.GetSqlType(System.Type,System.Int32)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="type"></param>
+            <param name="Size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Methods.GetSqlType(System.Type)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Methods.GetSqlDefault(System.Type)">
+            <summary>
+            获取类型默认值
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.AppDB.Query">
+            <summary>
+            封装数据库操作
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Query.SqlUpdate``1(MySqlConnector.MySqlConnection,``0,System.String,System.Boolean)">
+            <summary>
+            ADO数据库操作（非查询）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cnn"></param>
+            <param name="t"></param>
+            <param name="Id"></param>
+            <param name="defaultId"></param>
+            <returns>传入需要操作的类，给类赋值后传入参数,返回true则代表执行成功，False为失败</returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Query.SqlSelect``1(MySqlConnector.MySqlConnection,System.String)">
+            <summary>
+            查询表全部数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cnn"></param>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Query.SqlCountSelect``1(MySqlConnector.MySqlConnection,System.String)">
+            <summary>
+            查询总数
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cnn"></param>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Query.CheckTable(MySqlConnector.MySqlConnection,System.String)">
+            <summary>
+            检查表
+            </summary>
+            <param name="cnn"></param>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.AppDB.Query.CreateTable``1(MySqlConnector.MySqlConnection,System.String,System.String)">
+            <summary>
+            创建表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cnn"></param>
+            <param name="table"></param>
+            <param name="defaultId"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:WebApplicationTemplate.Controllers.UserController">
+            <summary>
+            用户控制器
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.#ctor(Microsoft.Extensions.Options.IOptionsSnapshot{WebApplicationTemplate.JWT.JwtSettings},Microsoft.Extensions.Logging.ILogger{WebApplicationTemplate.Controllers.UserController},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Caching.Memory.IMemoryCache,WebApplicationTemplate.Model.Entity.MyDBContext)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="jwtsettingOpt"></param>
+            <param name="logger"></param>
+            <param name="config"></param>
+            <param name="memoryCache"></param>
+            <param name="myDbContext"></param>
+            <param name="cnn"></param>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.UserLogin(WebApplicationTemplate.Model.From.UserRegister,FluentValidation.IValidator{WebApplicationTemplate.Model.From.UserRegister})">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userRegister"></param>
+            <param name="userRegisterOpt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.RegisterUser(WebApplicationTemplate.Model.From.UserRegister,FluentValidation.IValidator{WebApplicationTemplate.Model.From.UserRegister})">
+            <summary>
+            用户注册
+            </summary>
+            <param name="userRegister"></param>
+            <param name="userRegisterOpt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.GetAllUser">
+            <summary>
+            获取所有用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.AddAdmin">
+            <summary>
+            添加管理员
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.Controllers.UserController.ShowJwtMessage">
+            <summary>
+            显示jwt
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.JWT.JwtHelper">
+            <summary>
+            JWT帮助
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.JWT.JwtHelper.JwtCreate(System.Collections.Generic.List{System.Security.Claims.Claim},System.String,System.DateTime)">
+            <summary>
+            创建Jwt
+            </summary>
+            <param name="claims"></param>
+            <param name="key"></param>
+            <param name="expire"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.JWT.JwtSettings">
+            <summary>
+            JWT映射表
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.JWT.JwtSettings.SecrectKey">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.JWT.JwtSettings.ExpireSeconds">
+            <summary>
+            访问时间
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplicationTemplate.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplicationTemplate.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplicationTemplate.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApplicationTemplate.Model.Entity.MyDBContext">
+            <summary>
+            EFCore数据库构造
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.MyDBContext.Users">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.Model.Entity.MyDBContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{WebApplicationTemplate.Model.Entity.MyDBContext})">
+            <summary>
+            option
+            </summary>
+            <param name="option"></param>
+        </member>
+        <member name="T:WebApplicationTemplate.Model.Entity.User">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.ID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.Salt">
+            <summary>
+            密码用加密盐
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:WebApplicationTemplate.Model.Entity.User.Role">
+            <summary>
+            用户身份
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.Model.Enums.UserRole">
+            <summary>
+            用户规则
+            </summary>
+        </member>
+        <member name="F:WebApplicationTemplate.Model.Enums.UserRole.用户">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="F:WebApplicationTemplate.Model.Enums.UserRole.管理员">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.Model.From.UserRegister">
+            <summary>
+            用户注册
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.Model.From.UserRegister.#ctor(System.String,System.String)">
+            <summary>
+            用户注册
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.Model.From.UserRegisterValidator">
+            <summary>
+            用户注册验证
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.Model.From.UserRegisterValidator.#ctor">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="T:WebApplicationTemplate.Model.UserPasswordSet">
+            <summary>
+            密码加密
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.Model.UserPasswordSet.SaltedPassword(System.String,System.String)">
+            <summary>
+            加密密码创建
+            </summary>
+            <param name="password"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationTemplate.Model.UserPasswordSet.CreateSalt(System.String)">
+            <summary>
+            创建盐
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplicationTemplate.MyHub.MyHub">
+            <summary>
+            SignalR
+            </summary>
+        </member>
+        <member name="M:WebApplicationTemplate.MyHub.MyHub.SendPublicMsg(System.String)">
+            <summary>
+            SignR发送信息
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
