@@ -1,15 +1,11 @@
 ﻿using System.Security.Claims;
-using Dapper;
-using Dapper.Contrib.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using MySqlConnector;
 using WebApplicationTemplate.ActionFilter;
-using WebApplicationTemplate.AppDB;
 using WebApplicationTemplate.JWT;
 using WebApplicationTemplate.Model;
 using WebApplicationTemplate.Model.Entity;
@@ -39,7 +35,6 @@ public class UserController : Controller
     /// <param name="config"></param>
     /// <param name="memoryCache"></param>
     /// <param name="myDbContext"></param>
-    /// <param name="cnn"></param>
     public UserController(IOptionsSnapshot<JwtSettings> jwtsettingOpt, ILogger<UserController> logger, IConfiguration config, IMemoryCache memoryCache, MyDBContext myDbContext)
     {
         _jwtsettingOpt = jwtsettingOpt;
@@ -138,7 +133,7 @@ public class UserController : Controller
     [HttpGet]
     [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<User>))]
-    public async Task<IActionResult> GetAllUser()
+    public IActionResult GetAllUser()
     {
         var users = _dbContext.Users.ToList();
         return Ok(users);
