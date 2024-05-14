@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplicationTemplate.Model.Entity;
 
@@ -18,7 +19,22 @@ public class MyDBContext : DbContext
     /// <param name="option"></param>
     public MyDBContext(DbContextOptions<MyDBContext> option) : base(option)
     {
+        
+    }
 
+    /// <summary>
+    /// 实体配置类
+    /// </summary>
+    /// <param name="modelBuilder"></param>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<User>().HasKey(e => e.ID);
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.Property(e => e.UserName).HasMaxLength(20).IsRequired();
+            entity.Property(e => e.Email).IsRequired(false);
+        });
     }
 }
 

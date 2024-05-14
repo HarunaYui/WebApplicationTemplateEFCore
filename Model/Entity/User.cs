@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApplicationTemplate.Model.Enums;
 
@@ -13,7 +14,6 @@ public class User
     /// <summary>
     /// 用户ID
     /// </summary>
-    [Key]
     public int ID { get; set; } = -1;
 
     /// <summary>

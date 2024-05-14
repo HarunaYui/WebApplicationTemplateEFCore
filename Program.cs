@@ -22,6 +22,11 @@ builder.Services.AddDbContext<MyDBContext>(options =>
 {
     options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnectionString"),
         new MySqlServerVersion(new Version(8, 0, 37)));
+    options.LogTo(msg =>
+    {
+        if (!msg.Contains("CommandExecuting")) return;
+        Console.WriteLine(msg);
+    });
 });
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
